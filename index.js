@@ -1,12 +1,15 @@
 const gridEl = document.querySelector(".grid")
 
 const startBtn = document.getElementById("start")
+const restartBtn = document.getElementById("restart")
+const pauseBtn = document.getElementById("pause")
+const resumeBtn = document.getElementById("resume")
 const scoreEl = document.getElementById("score")
 
 let squareArr = []
 let mySnake = [2,1,0]
 let direction = 1
-let width = 10
+let width = 40
 let appleIndex = 0
 let score = 0
 let timeInteral = 1000
@@ -15,13 +18,12 @@ let timerId = 0
 
 function createGrid(){
 
-    for ( let i = 0; i < 100; i++){
+    for ( let i = 0; i < 400; i++){
         const square = document.createElement("div")
         gridEl.appendChild(square)
         square.classList.add("square")
         squareArr.push(square)
     }
-    console.log(squareArr)
 }
 
 createGrid()
@@ -41,9 +43,26 @@ function startGame(){
     generateApples()
     mySnake.forEach(i => squareArr[i].classList.add("snake"))
     timerId = setInterval(move, timeInteral)
+    restartBtn.style.display = "block"
+    pauseBtn.style.display = "block"
+    startBtn.style.display = "none"
 }
 
+function pauseGame(){
+    clearInterval(timerId)
+    resumeBtn.style.display = "block"
+    pauseBtn.style.display = "none"
+}
+
+function resumeGame(){
+    timerId = setInterval(move, timeInteral)
+    resumeBtn.style.display = "none"
+    pauseBtn.style.display = "block"
+}
 startBtn.addEventListener("click", startGame)
+restartBtn.addEventListener("click", startGame)
+pauseBtn.addEventListener("click", pauseGame)
+resumeBtn.addEventListener("click", resumeGame)
 
 function move(){
 
@@ -59,7 +78,7 @@ function move(){
     const tail = mySnake.pop()
     squareArr[tail].classList.remove("snake")
     mySnake.unshift(mySnake[0] + direction)
-
+    
     if (squareArr[mySnake[0]].classList.contains("apple") ) {
         squareArr[mySnake[0]].classList.remove("apple")       
         squareArr[tail].classList.add("snake")          
@@ -70,9 +89,8 @@ function move(){
         clearInterval(timerId)
         timeInteral = timeInteral * speed
         timerId = setInterval(move, timeInteral)
+        
     }
-
-
     squareArr[mySnake[0]].classList.add("snake")
 }
 

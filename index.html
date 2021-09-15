@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,24 @@
     <link href="style.css" rel="stylesheet">
     <title>Snake</title>
 </head>
+
 <body>
-    <h1> Snake Game</h1>
-    <button id="start">StartGame/Restart</button>
-    <h2>Score:<span id="score">-</span></h2>
-    <div class="grid"></div>
+    <div class="container">
+        <div class="logo">
+            <img src="snakeLogo.jpg" alt="snake logo">
+            <h1> Snake Game</h1>
+        </div>
+        <button id="start">Start Game</button>
+        <button id="restart">Restart</button>
+        <div class="controlBtn">
+            <button id="pause">Pause Game</button>
+            <button id="resume">Resume Game</button>
+
+        </div>
+        <h2>Score:<span id="score">-</span></h2>
+        <div class="grid"></div>
+    </div>
     <script src="index.js"></script>
 </body>
+
 </html>
