@@ -9,7 +9,7 @@ const scoreEl = document.getElementById("score")
 let squareArr = []
 let mySnake = [2,1,0]
 let direction = 1
-let width = 40
+let width = 35
 let appleIndex = 0
 let score = 0
 let timeInteral = 1000
@@ -18,7 +18,7 @@ let timerId = 0
 
 function createGrid(){
 
-    for ( let i = 0; i < 400; i++){
+    for ( let i = 0; i < width*width; i++){
         const square = document.createElement("div")
         gridEl.appendChild(square)
         square.classList.add("square")
@@ -28,10 +28,10 @@ function createGrid(){
 
 createGrid()
 
-mySnake.forEach(i => squareArr[i].classList.add("snake"))
+mySnake.forEach(index => squareArr[index].classList.add("snake"))
 
 function startGame(){
-    mySnake.forEach(i => squareArr[i].classList.remove("snake"))
+    mySnake.forEach(index => squareArr[index].classList.remove("snake"))
     squareArr[appleIndex].classList.remove("apple")
     clearInterval(timerId)
     score = 0
@@ -41,7 +41,7 @@ function startGame(){
     timeInteral = 1000
 
     generateApples()
-    mySnake.forEach(i => squareArr[i].classList.add("snake"))
+    mySnake.forEach(index => squareArr[index].classList.add("snake"))
     timerId = setInterval(move, timeInteral)
     restartBtn.style.display = "block"
     pauseBtn.style.display = "block"
@@ -78,7 +78,7 @@ function move(){
     const tail = mySnake.pop()
     squareArr[tail].classList.remove("snake")
     mySnake.unshift(mySnake[0] + direction)
-    
+
     if (squareArr[mySnake[0]].classList.contains("apple") ) {
         squareArr[mySnake[0]].classList.remove("apple")       
         squareArr[tail].classList.add("snake")          
