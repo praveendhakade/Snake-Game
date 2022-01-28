@@ -31,6 +31,7 @@ createGrid()
 mySnake.forEach(index => squareArr[index].classList.add("snake"))
 
 function startGame(){
+    // when restarting the  game
     mySnake.forEach(index => squareArr[index].classList.remove("snake"))
     squareArr[appleIndex].classList.remove("apple")
     clearInterval(timerId)
@@ -40,25 +41,27 @@ function startGame(){
     mySnake = [2,1,0]
     timeInteral = 1000
 
+    // generating apples for snake to eat
     generateApples()
     mySnake.forEach(index => squareArr[index].classList.add("snake"))
     timerId = setInterval(move, timeInteral)
-    restartBtn.style.display = "block"
-    pauseBtn.style.display = "block"
+    restartBtn.style.display = "inline-block"
+    pauseBtn.style.display = "inline-block"
     startBtn.style.display = "none"
 }
 
 function pauseGame(){
     clearInterval(timerId)
-    resumeBtn.style.display = "block"
+    resumeBtn.style.display = "inline-block"
     pauseBtn.style.display = "none"
 }
 
 function resumeGame(){
     timerId = setInterval(move, timeInteral)
     resumeBtn.style.display = "none"
-    pauseBtn.style.display = "block"
+    pauseBtn.style.display = "inline-block"
 }
+
 startBtn.addEventListener("click", startGame)
 restartBtn.addEventListener("click", startGame)
 pauseBtn.addEventListener("click", pauseGame)
